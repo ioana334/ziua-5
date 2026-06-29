@@ -84,4 +84,31 @@ public class TripService {
                 Trip saved=tripRepository.save(trip)
                 return TripMapper.toResponse(saved); 
     }
+    public List<TripResponse> getTripsByUser(Long userId) {
+    return tripRepository.findByUserId(userId)
+            .stream()
+            .map(TripMapper::toResponse)
+            .toList();
+}
+
+public List<TripResponse> getTripsByStatus(String status) {
+    return tripRepository.findByStatus(status.toUpperCase())
+            .stream()
+            .map(TripMapper::toResponse)
+            .toList();
+}
+
+public List<TripResponse> getTripsByDestination(String destination) {
+    return tripRepository.findByDestinationContainingIgnoreCase(destination)
+            .stream()
+            .map(TripMapper::toResponse)
+            .toList();
+}
+
+public List<TripResponse> getTripsByDateRange(String start, String end) {
+    return tripRepository.findByStartDateBetween(start, end)
+            .stream()
+            .map(TripMapper::toResponse)
+            .toList();
+}
 }

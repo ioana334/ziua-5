@@ -56,4 +56,26 @@ public class TripController {
     public ResponseEntity<TripResponse> rejectTrip(@PathVariable Long id) {
         return ResponseEntity.ok(tripService.rejectTrip(id));
     }
+    @GetMapping("/user/{userId}")
+public ResponseEntity<List<TripResponse>> getTripsByUser(@PathVariable Long userId) {
+    return ResponseEntity.ok(tripService.getTripsByUser(userId));
+}
+
+@GetMapping("/status/{status}")
+public ResponseEntity<List<TripResponse>> getTripsByStatus(@PathVariable String status) {
+    return ResponseEntity.ok(tripService.getTripsByStatus(status));
+}
+
+@GetMapping("/destination/{destination}")
+public ResponseEntity<List<TripResponse>> getTripsByDestination(@PathVariable String destination) {
+    return ResponseEntity.ok(tripService.getTripsByDestination(destination));
+}
+
+@GetMapping("/dates")
+public ResponseEntity<List<TripResponse>> getTripsByDateRange(
+        @RequestParam String start,
+        @RequestParam String end
+) {
+    return ResponseEntity.ok(tripService.getTripsByDateRange(start, end));
+}
 }
